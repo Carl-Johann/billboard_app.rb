@@ -1,21 +1,31 @@
 require 'date'
 require 'artii'
 require 'udacicharts'
-require 'pp'
+require 'colorize'
+
 a = Artii::Base.new :font => "speed"
 hot100 = BillboardCharts.new.get_list
 
-puts "*"*11 + Date.today.strftime("%a %d %b %Y") + "*"*11
-puts a.asciify('Hot 100')
+stars = "*"*11
+stars = stars.colorize(:blue)
+
+tid = Date.today.strftime("%a %d %b %Y")
+tid = tid.colorize(:yellow)
+
+hot_100 = a.asciify('Hot 100')
+#hot_100 = hot_100.colorize(:magenta)
 #pp hot100
 #p hot100
-def lort(list)
+
+def print_hot100(list)
 	counter = 1
 	list.each do |makers, song|
-		puts "#{counter}. #{makers} - #{song}"
+		puts "#{counter}. #{song} - #{makers}"
 		counter += 1
 	end
 end
 
-lort(hot100)
+puts "#{stars} #{tid} #{stars}"
+puts hot_100.colorize(:magenta)
+print_hot100(hot100)
 
